@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OSMap/OSMap.h"
 
 @interface WebMapViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet OSMapView *mapView;
 
 @end
