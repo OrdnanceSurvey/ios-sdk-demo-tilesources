@@ -12,8 +12,8 @@
 #import "OSMAP/OSTileSource.h"
 
 
-#define kOS_API_KEY @"BA08531D8339984EE0405F0AC86026A9"
-#define kOS_URL @"http://openspacejseditor.ordnancesurvey.co.uk/viewer/"
+#define kOS_API_KEY @"YOUR_KEY_HERE"
+#define kOS_URL @"YOUR_URL_HERE"
 #define kIS_PRO FALSE
 
 @interface DBSourceViewController () <OSMapViewDelegate>
