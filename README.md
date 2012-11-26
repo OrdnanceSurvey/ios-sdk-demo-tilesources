@@ -7,7 +7,7 @@ This includes a small sample OSTiles package containing 50K, 50KR, 250K and 250K
 
 
 
-![ScreenShot](screenshot.png "Screenshot of OSTileSourceDemo app")
+![ScreenShot](https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources/raw/master/screenshot.png "Screenshot of demo app")
 
 Getting started
 ---
