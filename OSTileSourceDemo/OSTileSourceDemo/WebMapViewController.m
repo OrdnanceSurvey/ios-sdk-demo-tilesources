@@ -8,9 +8,6 @@
 
 #import "WebMapViewController.h"
 
-#define kOS_API_KEY @"YOUR_KEY_HERE"
-#define kOS_URL @"YOUR_URL_HERE"
-#define kIS_PRO FALSE
 
 @interface WebMapViewController () <OSMapViewDelegate>
 
@@ -21,15 +18,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     {
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOS_API_KEY refererUrl:kOS_URL openSpacePro:kIS_PRO];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSApiKeyUrl openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
         _mapView.delegate = self;
         _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        
+        NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
         
     }
     
@@ -40,7 +38,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    _mapView = nil;
 }
 
 @end

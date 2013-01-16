@@ -12,9 +12,6 @@
 #import "OSMAP/OSTileSource.h"
 
 
-#define kOS_API_KEY @"YOUR_KEY_HERE"
-#define kOS_URL @"YOUR_URL_HERE"
-#define kIS_PRO FALSE
 
 @interface DBSourceViewController () <OSMapViewDelegate>
 
@@ -28,37 +25,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     showingPackageBounds = NO;
     
     {
+        NSMutableArray *tileSources = [NSMutableArray new];
+        NSMutableArray *products = [NSMutableArray new];
+        
+        
         //load sample ostiles package bundled with project
-        id<OSTileSource> sampleSource = [OSMapView localTileSourceWithFileURL:[[NSBundle mainBundle] URLForResource:@"sample.ostiles" withExtension:nil]];
+        id<OSTileSource> sampleSource = [self sampleTilePackage];
         
         // Tile sources are consulted in the order they appear in the array.
-        NSMutableArray * tileSources = [NSMutableArray arrayWithObject:sampleSource];
+        [tileSources addObject:sampleSource];
+        
+        //use reduced set of product codes
+        [products addObjectsFromArray:[NSArray arrayWithObjects:@"OV0", @"OV1", @"OV2", nil]];
         
 #if 1 //enable-disable the web map source
         
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOS_API_KEY refererUrl:kOS_URL openSpacePro:kIS_PRO];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSApiKeyUrl openSpacePro:kOSIsPro];
         
         [tileSources addObject:webSource];
         
-#endif
-        _mapView.tileSources = tileSources;
+        //add more products
+        [products addObjectsFromArray:[NSArray arrayWithObjects:@"MSR", @"MS", @"250KR", @"250K", @"50KR", @"50K", nil]];
         
-        //use reduced set of product codes
-        _mapView.mapProductCodes = [NSArray arrayWithObjects:@"OV1", @"OV2", @"MSR", @"MS", @"250KR", @"250K", @"50KR", @"50K", nil];
+#endif
+        
+        _mapView.tileSources = [NSArray arrayWithArray:tileSources];
+        _mapView.mapProductCodes = [NSArray arrayWithArray:products];
         
         _mapView.delegate = self;
         _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         
+        NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
+        
     }
     
     
-    //add showPackageBoundsBtn button to view
+    //add a button to view
     {
         UIButton *showPackageBoundsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         showPackageBoundsBtn.frame = CGRectMake(10, 10, 40, 40);
@@ -88,19 +95,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
-    _mapView = nil;
 }
+
 
 
 /*
- * Set map centre point to static location
+ * return a sample tilesource package
+ * Product codes: @"OV0", @"OV1", @"OV2"
+ * Bounds: 0,0,700000,1300000
  */
-- (void)setMapCentre
+- (id<OSTileSource>)sampleTilePackage
 {
-    OSGridPoint mapCenter = (OSGridPoint){390000, 484000};
-    
-    [_mapView setRegion:OSCoordinateRegionMakeWithDistance(OSCoordinateForGridPoint(mapCenter), 50000, 50000)];
+    return [OSMapView localTileSourceWithFileURL:[[NSBundle mainBundle] URLForResource:@"sample.ostiles" withExtension:nil]];
 }
+
+
+
+#pragma mark IBAction methods
 
 
 /*
@@ -108,39 +119,49 @@
  */
 - (IBAction)toggleShowPackageBounds:(id)sender
 {
-    //toggle display
-    if( showingPackageBounds == NO ){
+    
+    static NSString * productCodeToDisplay = @"OV2";
+
+    
+    //toggle display of tile source package bounds
+    if( showingPackageBounds ){
+        
+        [_mapView removeOverlays:_mapView.overlays];
+        
+    }else{
         
         //loop through tileSources
-        for(id<OSTileSource> ts in _mapView.tileSources){
-            
-            //Get the bounds for just the 50K product
-            OSGridRect gr = [ts boundsForProductCode:@"50K"];
-            
-            //Were not interested in the bounds of web-based maps, just the ostiles packages
-            if( !OSGridRectEqualToRect(gr, OSNationalGridBounds) ){
-                [self plotTileBoundsForGR:gr];
+        for(id<OSTileSource> ts in _mapView.tileSources)
+        {
+            //proceed if tilesource is local - not web source
+            if([ts isLocal])
+            {
+                OSGridRect gr = [ts boundsForProductCode: productCodeToDisplay];
+                
+                //assert if a valid OSGridRect
+                if( !OSGridRectEqualToRect(gr, OSGridRectNull) )
+                {
+                    [self plotTileBoundsForGridRect: gr];
+                    
+                    NSLog(@"Tilesource bounds for prodcode %@ : %.0f,%.0f,%.0f,%.0f",productCodeToDisplay, gr.originSW.easting,gr.originSW.northing, gr.originSW.easting+gr.size.width, gr.originSW.northing+gr.size.height);
+                }
+
+                
             }
             
         }
         
-        [self setMapCentre];
-        
-    }else{
-        
-        [_mapView removeOverlays:_mapView.overlays];
-        
     }
-    
+
     showingPackageBounds = !showingPackageBounds;
     
 }
 
 
 /*
- * Generic method to add a OSPolygon overlay for an OSGridRect
+ * Generic method to add a OSPolygon overlay for the OSGridRect passed
  */
--(void)plotTileBoundsForGR: (OSGridRect)gr
+-(void)plotTileBoundsForGridRect: (OSGridRect)gr
 {
     
     OSGridPoint se;
@@ -170,7 +191,7 @@
     if ([overlay isKindOfClass:[OSPolygon class]])
     {
         /*
-         * style OSPolygon views
+         * style OSPolygon view
          */
         OSPolygonView * view = [[OSPolygonView alloc] initWithPolygon:(id)overlay];
         view.lineWidth = 1;
