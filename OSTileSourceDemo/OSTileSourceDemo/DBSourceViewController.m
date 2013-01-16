@@ -42,7 +42,7 @@
         //use reduced set of product codes
         [products addObjectsFromArray:[NSArray arrayWithObjects:@"OV0", @"OV1", @"OV2", nil]];
         
-#if 1 //enable-disable the web map source
+#if 0 //enable-disable the web map source
         
         //create web tile source with API details
         id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSApiKeyUrl openSpacePro:kOSIsPro];
