@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F08FAA416A6F1EE002EA127 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F08FAA316A6F1EE002EA127 /* Common.m */; };
 		5FFB4E7F161D8AE500FAA45E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB4E7E161D8AE500FAA45E /* UIKit.framework */; };
 		5FFB4E81161D8AE500FAA45E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB4E80161D8AE500FAA45E /* Foundation.framework */; };
 		5FFB4E83161D8AE500FAA45E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB4E82161D8AE500FAA45E /* CoreGraphics.framework */; };
@@ -30,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5F08FAA216A6F1EE002EA127 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		5F08FAA316A6F1EE002EA127 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		5FFB4E7A161D8AE500FAA45E /* OSTileSourceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTileSourceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FFB4E7E161D8AE500FAA45E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5FFB4E80161D8AE500FAA45E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -118,6 +121,8 @@
 				5FFB4E85161D8AE500FAA45E /* Supporting Files */,
 				5FFB4EA9161D8BA400FAA45E /* DBSourceViewController.h */,
 				5FFB4EAA161D8BA400FAA45E /* DBSourceViewController.m */,
+				5F08FAA216A6F1EE002EA127 /* Common.h */,
+				5F08FAA316A6F1EE002EA127 /* Common.m */,
 			);
 			path = OSTileSourceDemo;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				5FFB4E8F161D8AE500FAA45E /* AppDelegate.m in Sources */,
 				5FFB4E9B161D8AE500FAA45E /* WebMapViewController.m in Sources */,
 				5FFB4EAB161D8BA400FAA45E /* DBSourceViewController.m in Sources */,
+				5F08FAA416A6F1EE002EA127 /* Common.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +343,7 @@
 				5FFB4EA0161D8AE500FAA45E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
