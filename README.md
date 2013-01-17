@@ -60,6 +60,10 @@ You can test the app still renders the sample.ostiles package by disabling netwo
 #if 1 //enable-disable the web map source
 </pre>
 
+Questions and Issues
+-------
+
+If you have any questions or issues with the ordnancesurey-ios-sdk or this demo app then please TODO: url to o-s.co.uk openspace forum
 
 License
 -------
