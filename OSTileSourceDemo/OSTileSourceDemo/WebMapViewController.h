@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "OSMap/OSMap.h"
+#import "MapViewController.h"
 
-@interface WebMapViewController : UIViewController
+@interface WebMapViewController : MapViewController <DisplaysProductBounds>
 
 @property (weak, nonatomic) IBOutlet OSMapView *mapView;
+
+@property (nonatomic, assign) BOOL showingPackageBounds;
 
 @end

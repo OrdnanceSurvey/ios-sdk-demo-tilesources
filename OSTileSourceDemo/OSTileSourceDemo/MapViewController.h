@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <OSMap/OSMap.h>
+
+@protocol DisplaysProductBounds
+
+- (IBAction)toggleShowPackageBounds:(id)sender;
+
+@property (nonatomic, assign) BOOL showingPackageBounds;
+
+@end
 
 @interface MapViewController : UIViewController
+
+-(OSPolygon *)getPolygonForGridRect:(OSGridRect)gr;
 
 @end

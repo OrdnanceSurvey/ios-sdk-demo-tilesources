@@ -8,9 +8,6 @@
 
 #import "DBSourceViewController.h"
 
-#import <QuartzCore/QuartzCore.h>
-#import "OSMAP/OSTileSource.h"
-
 
 
 @interface DBSourceViewController () <OSMapViewDelegate>
@@ -18,15 +15,13 @@
 @end
 
 @implementation DBSourceViewController
-{
-    BOOL showingPackageBounds;
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    showingPackageBounds = NO;
+    _showingPackageBounds = NO;
     
     {
         NSMutableArray *tileSources = [NSMutableArray new];
@@ -45,7 +40,7 @@
 #if 0 //enable-disable the web map source
         
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey refererUrl:kOSApiKeyUrl openSpacePro:kOSIsPro];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey appleId:kOSAppleAppId openSpacePro:kOSIsPro];
         
         [tileSources addObject:webSource];
         
@@ -65,28 +60,6 @@
     }
     
     
-    //add a button to view
-    {
-        UIButton *showPackageBoundsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        showPackageBoundsBtn.frame = CGRectMake(10, 10, 40, 40);
-        showPackageBoundsBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-        showPackageBoundsBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        [showPackageBoundsBtn setImage:[UIImage imageNamed:@"screen.png"] forState:UIControlStateNormal];
-        
-        [[showPackageBoundsBtn layer] setCornerRadius:8.0f];
-        [[showPackageBoundsBtn layer] setMasksToBounds:YES];
-        [[showPackageBoundsBtn layer] setBorderColor:[[UIColor grayColor] CGColor]];
-        [[showPackageBoundsBtn layer] setBackgroundColor:[[UIColor grayColor] CGColor]];
-        [[showPackageBoundsBtn layer] setOpacity:0.5f];
-        [[showPackageBoundsBtn layer] setBorderWidth:3.0f];
-        
-        [showPackageBoundsBtn addTarget:self action:@selector(toggleShowPackageBounds:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:showPackageBoundsBtn];
-        [self.view bringSubviewToFront:showPackageBoundsBtn];
-        
-    }
-    
 }
 
 
@@ -100,7 +73,7 @@
 
 
 /*
- * return a sample tilesource package
+ * return a sample tilesource package, currently included is:
  * Product codes: @"OV0", @"OV1", @"OV2"
  * Bounds: 0,0,700000,1300000
  */
@@ -111,84 +84,11 @@
 
 
 
-#pragma mark IBAction methods
-
-
-/*
- * Handle button tap to toggle display of the ostiles packages 
- */
-- (IBAction)toggleShowPackageBounds:(id)sender
-{
-    
-    static NSString * productCodeToDisplay = @"OV2";
-
-    
-    //toggle display of tile source package bounds
-    if( showingPackageBounds ){
-        
-        [_mapView removeOverlays:_mapView.overlays];
-        
-    }else{
-        
-        //loop through tileSources
-        for(id<OSTileSource> ts in _mapView.tileSources)
-        {
-            //proceed if tilesource is local - not web source
-            if([ts isLocal])
-            {
-                OSGridRect gr = [ts boundsForProductCode: productCodeToDisplay];
-                
-                //assert if a valid OSGridRect
-                if( !OSGridRectEqualToRect(gr, OSGridRectNull) )
-                {
-                    [self plotTileBoundsForGridRect: gr];
-                    
-                    NSLog(@"Tilesource bounds for prodcode %@ : %.0f,%.0f,%.0f,%.0f",productCodeToDisplay, gr.originSW.easting,gr.originSW.northing, gr.originSW.easting+gr.size.width, gr.originSW.northing+gr.size.height);
-                }
-
-                
-            }
-            
-        }
-        
-    }
-
-    showingPackageBounds = !showingPackageBounds;
-    
-}
-
-
-/*
- * Generic method to add a OSPolygon overlay for the OSGridRect passed
- */
--(void)plotTileBoundsForGridRect: (OSGridRect)gr
-{
-    
-    OSGridPoint se;
-    se.easting = gr.originSW.easting + gr.size.width;
-    se.northing = gr.originSW.northing;
-    
-    OSGridPoint nw;
-    nw.easting = gr.originSW.easting;
-    nw.northing = gr.originSW.northing + gr.size.height;
-    
-    OSGridPoint ne;
-    ne.easting = gr.originSW.easting + gr.size.width;
-    ne.northing = gr.originSW.northing + gr.size.height;
-    
-    OSGridPoint points[] = {{gr.originSW.easting,gr.originSW.northing},{se.easting,se.northing},{ne.easting,ne.northing},{nw.easting,nw.northing}};
-    
-    OSPolygon * box = [OSPolygon polygonWithGridPoints:points count:4];
-    [_mapView addOverlay:box];
-    
-}
-
-
 #pragma mark OSMapviewdelegate methods
 
 -(OSOverlayView *)mapView:(OSMapView *)mapView viewForOverlay:(id<OSOverlay>)overlay
 {
-    if ([overlay isKindOfClass:[OSPolygon class]])
+    if ( [overlay isKindOfClass:[OSPolygon class]] )
     {
         /*
          * style OSPolygon view
@@ -201,6 +101,48 @@
         
     }
     return nil;
+}
+
+
+#pragma mark DisplaysProductBounds methods
+
+
+/*
+ * Handle button tap to toggle display of the ostiles packages
+ */
+- (IBAction)toggleShowPackageBounds:(id)sender
+{
+    
+    static NSString * productCodeToDisplay = @"OV2";
+    
+    
+    //toggle display of tile source package bounds
+    if( _showingPackageBounds ){
+        
+        [_mapView removeOverlays:_mapView.overlays];
+        
+    }else{
+        
+        //loop through tileSources
+        for( id<OSTileSource> ts in _mapView.tileSources )
+        {
+            //Grab the bounding box displayed by this tileSource
+            OSGridRect gr = [ts boundsForProductCode: productCodeToDisplay];
+            
+            //assert if a valid OSGridRect
+            if( !OSGridRectEqualToRect(gr, OSGridRectNull) )
+            {
+                [_mapView addOverlay: [super getPolygonForGridRect:gr]];
+                
+                NSLog(@"Tilesource bounds for prodcode %@ : %.0f,%.0f,%.0f,%.0f",productCodeToDisplay, gr.originSW.easting,gr.originSW.northing, gr.originSW.easting+gr.size.width, gr.originSW.northing+gr.size.height);
+            }
+            
+        }
+        
+    }
+    
+    _showingPackageBounds = !_showingPackageBounds;
+    
 }
 
 
