@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5F08FAA416A6F1EE002EA127 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F08FAA316A6F1EE002EA127 /* Common.m */; };
+		5F46A521171D881300D719DC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F46A520171D881300D719DC /* SystemConfiguration.framework */; };
+		5F46A526171D8D9B00D719DC /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F46A525171D8D9B00D719DC /* MapViewController.m */; };
 		5FFB4E7F161D8AE500FAA45E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB4E7E161D8AE500FAA45E /* UIKit.framework */; };
 		5FFB4E81161D8AE500FAA45E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB4E80161D8AE500FAA45E /* Foundation.framework */; };
 		5FFB4E83161D8AE500FAA45E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FFB4E82161D8AE500FAA45E /* CoreGraphics.framework */; };
@@ -33,6 +35,9 @@
 /* Begin PBXFileReference section */
 		5F08FAA216A6F1EE002EA127 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		5F08FAA316A6F1EE002EA127 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		5F46A520171D881300D719DC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5F46A524171D8D9B00D719DC /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		5F46A525171D8D9B00D719DC /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		5FFB4E7A161D8AE500FAA45E /* OSTileSourceDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OSTileSourceDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FFB4E7E161D8AE500FAA45E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5FFB4E80161D8AE500FAA45E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -66,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F46A521171D881300D719DC /* SystemConfiguration.framework in Frameworks */,
 				5FFB4EA6161D8B2600FAA45E /* CoreLocation.framework in Frameworks */,
 				5FFB4EA4161D8B1E00FAA45E /* QuartzCore.framework in Frameworks */,
 				5FFB4EA2161D8B1A00FAA45E /* libsqlite3.dylib in Frameworks */,
@@ -99,6 +105,7 @@
 		5FFB4E7D161D8AE500FAA45E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F46A520171D881300D719DC /* SystemConfiguration.framework */,
 				5FFB4EA7161D8B5400FAA45E /* OSMap.framework */,
 				5FFB4EA5161D8B2600FAA45E /* CoreLocation.framework */,
 				5FFB4EA3161D8B1E00FAA45E /* QuartzCore.framework */,
@@ -123,6 +130,8 @@
 				5FFB4EAA161D8BA400FAA45E /* DBSourceViewController.m */,
 				5F08FAA216A6F1EE002EA127 /* Common.h */,
 				5F08FAA316A6F1EE002EA127 /* Common.m */,
+				5F46A524171D8D9B00D719DC /* MapViewController.h */,
+				5F46A525171D8D9B00D719DC /* MapViewController.m */,
 			);
 			path = OSTileSourceDemo;
 			sourceTree = "<group>";
@@ -220,6 +229,7 @@
 				5FFB4E9B161D8AE500FAA45E /* WebMapViewController.m in Sources */,
 				5FFB4EAB161D8BA400FAA45E /* DBSourceViewController.m in Sources */,
 				5F08FAA416A6F1EE002EA127 /* Common.m in Sources */,
+				5F46A526171D8D9B00D719DC /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
