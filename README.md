@@ -29,7 +29,9 @@ If you do not own a re-use data licence you can register for an API key to acces
 
 If you own a data licence, for example, you are a member of the PSMA, you can register for an API key to access [OSOnDemand WMTS] (http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-ondemand/pricing.html).
 
-#### Clone project
+#### Download project
+
+Copy the project to your local machine, eg:
 
 <pre>
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
@@ -37,39 +39,50 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 #### Download ordnancesurvey-ios-sdk
 
- - Download the latest ordnancesurvey-ios-sdk static framework TBC 
- - Unzip into the project directory root
- <pre>
- $SRCROOT/StaticFrameworks
- </pre>
+- Download the latest ordnancesurvey-ios-sdk static framework TBC 
+- Unzip the SDK into the `StaticFrameworks` directory at the root of the project
+
+<pre>
+$SRCROOT/StaticFrameworks
+</pre>
  
 
-#### Update demo app with your API Key
+#### Update demo app with your API Key and Bundle Identifier details
 
-Copy and paste the API Key and associated URL into the demo app
+Copy and paste the API Key into the demo app
 
-Note: if an OS OpenSpace Pro account then change kOSIsPro to YES
+Update the Bundle Identifier associated with the API Key
 
 <pre>
 //In Common.m
 
 NSString *const kOSApiKey = @"YOUR_API_KEY";
-NSString *const kOSApiKeyUrl = @"URL_HERE";
 const BOOL kOSIsPro = YES;
 
 </pre>
 
 #### Build and run
 
-Project can now be built and run. The button in on the DB Tile Source tab view will toggle displaying the bounds of the OV0 product from the DB tilesource.
+Project can now be built and run. 
+
+The Web Map Source tab is displaying tiles from the OS OpenSpace service and the DB Tile Source tab is displaying limited products from the `sample.ostiles` package included.
+
+The button in each view will toggle displaying the bounds of the `OV2` product from the respective tilesource.
 
 #### Test offline
 
-You can test the app still renders the sample.ostiles package by disabling network connection or alter the line in DBSourceViewController.m below to disable (set to 0) web map source - this removes any connection to the WMTS.
+You can test that DB Tile Source tab still functions correctly by disabling any phone data connections and panning around the map.
+
+#### Combining tilesources
+
+The `OSMapView` component consults tilesources in the order in which they appear in the array when passed to `OSMapView`, this allows you to add local tilesource as first choice, falling back to a web tilesource if no match for the product or tile in the local package.
+
+There is a switch in `DBSourceViewController.m` to toggle this behaviour; find the line below to disable (set to 0) or enable (set to 1) the web map source.
 
 <pre>
-#if 1 //enable-disable the web map source
+#if 0 //enable-disable the web map source
 </pre>
+
 
 Questions and Issues
 -------
