@@ -75,7 +75,7 @@
 - (IBAction)toggleShowPackageBounds:(id)sender
 {
     
-    static NSString * productCodeToDisplay = @"OV1";
+    static NSString * productCodeToDisplay = @"OV2";
     
     //toggle display of tile source package bounds
     if( _showingPackageBounds ){
