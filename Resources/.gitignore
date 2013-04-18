@@ -1,0 +1,7 @@
+#ignore these
+*
+
+#but not these
+!.gitignore
+!*.ostiles
+
