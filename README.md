@@ -39,7 +39,7 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 #### Download ordnancesurvey-ios-sdk
 
-- Download the latest ordnancesurvey-ios-sdk static framework TBC 
+- Download the latest ordnancesurvey-ios-sdk framework from [www.ordnancesurvey.co.uk](https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/ios-sdk.html)
 - Unzip the SDK into the `StaticFrameworks` directory at the root of the project
 
 <pre>
