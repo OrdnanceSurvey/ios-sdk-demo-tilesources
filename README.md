@@ -14,16 +14,24 @@ Getting started
 ---
 
 
-#### Register for an API Key
+### Register for an API Key
 
-Developers who wish to use the WMTS services will need to register an App Name in order to authenticate the API key in the following format:
+Developers who wish to use the online services will need to register for an API key in order to authenticate requests.
 
-APPLE_ID.BUNDLE_ID e.g. 12345678.com.example.find-a-postbox 
+When registering for an API Key we need to know a couple of items:
 
-Apple App ID: This is a numerical value that is unique for each iOS app and has to be created in Apple's iOS Provisioning portal.
-Bundle Identifier: This is the reverse domain name specified in Xcode, this is generated from the app name (how you name your project) and the company identifier specified. 
+* Bundle Identifier of the application using the API key
 
-#### Registration Process
+Let us know the Bundle Identifier of the Xcode project in which you will be using the API. This is available and configurable when creating an Xcode project or from project settings or `Info.plist`
+
+
+* Apple App ID to be associated with this application
+
+This ID is the unique Apple ID generated in iTunes Connect when creating a new iOS application for the Apple AppStore
+
+
+
+### Registration Process
 
 If you do not own a re-use data licence you can register for an API key to access [OS OpenSpace Pro] (https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/index.html) under a 90 day trial or a commercial re-use licence. 
 
@@ -33,9 +41,9 @@ If you own a data licence, for example, you are a member of the PSMA, you can re
 
 Copy the project to your local machine, eg:
 
-<pre>
+```bash
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
-</pre>
+```
 
 #### Download ordnancesurvey-ios-sdk
 
@@ -53,13 +61,13 @@ Copy and paste the API Key into the demo app
 
 Update the Bundle Identifier associated with the API Key
 
-<pre>
+```objective-c
 //In Common.m
 
 NSString *const kOSApiKey = @"YOUR_API_KEY";
 const BOOL kOSIsPro = YES;
 
-</pre>
+```
 
 #### Build and run
 
@@ -79,9 +87,9 @@ The `OSMapView` component consults tilesources in the order in which they appear
 
 There is a switch in `DBSourceViewController.m` to toggle this behaviour; find the line below to disable (set to 0) or enable (set to 1) the web map source.
 
-<pre>
+```objective-c
 #if 0 //enable-disable the web map source
-</pre>
+```
 
 
 Questions and Issues
