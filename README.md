@@ -1,9 +1,9 @@
 Description
 ---
 
-A sample app using the ordnancesurvey-ios-sdk displaying different tile sources. One view uses standard WMTS source while another can combine this alongside an OSTiles package.
+A sample app using the openspace-ios-sdk displaying different tile sources. One view uses standard WMTS source while another can combine this alongside an OSTiles package.
 
-This project includes a small sample OSTiles package containing OV0, OV1 and OV2 products to demonstrate the offline capabilities and potential of the ordnancesurvey-ios-sdk.
+This project includes a small sample OSTiles package containing OV0, OV1 and OV2 products to demonstrate the offline capabilities and potential of the openspace-ios-sdk.
 
 
 
@@ -14,20 +14,9 @@ Getting started
 ---
 
 
-#### Register for an API Key
+#### Registration and Access
 
-Developers who wish to use the WMTS services will need to register an App Name in order to authenticate the API key in the following format:
-
-APPLE_ID.BUNDLE_ID e.g. 12345678.com.example.find-a-postbox 
-
-Apple App ID: This is a numerical value that is unique for each iOS app and has to be created in Apple's iOS Provisioning portal.
-Bundle Identifier: This is the reverse domain name specified in Xcode, this is generated from the app name (how you name your project) and the company identifier specified. 
-
-#### Registration Process
-
-If you do not own a re-use data licence you can register for an API key to access [OS OpenSpace Pro] (https://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/pro/index.html) under a 90 day trial or a commercial re-use licence. 
-
-If you own a data licence, for example, you are a member of the PSMA, you can register for an API key to access [OSOnDemand WMTS] (http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-ondemand/pricing.html).
+[How to register](https://github.com/OrdnanceSurvey/openspace-ios-sdk#registration-and-access)
 
 #### Clone project
 
@@ -35,9 +24,9 @@ If you own a data licence, for example, you are a member of the PSMA, you can re
 git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 </pre>
 
-#### Download ordnancesurvey-ios-sdk
+#### Download openspace-ios-sdk
 
- - Download the latest ordnancesurvey-ios-sdk static framework TBC 
+ - Download the latest openspace-ios-sdk static framework TBC 
  - Unzip into the project directory root
  <pre>
  $SRCROOT/StaticFrameworks
@@ -48,7 +37,7 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 Copy and paste the API Key and associated URL into the demo app
 
-Note: if an OS OpenSpace Pro account then change kOSIsPro to YES
+Note: if an OS OpenSpace Pro or OS OnDemand account then change kOSIsPro to YES
 
 <pre>
 //In Common.m
@@ -74,16 +63,14 @@ You can test the app still renders the sample.ostiles package by disabling netwo
 Questions and Issues
 -------
 
-If you have any questions or issues with the ordnancesurvey-ios-sdk or this demo app then please email osopenspacepro@ordnancesurvey.co.uk
+If you have any questions or issues with the openspace-ios-sdk or this demo app then please email osopenspace@ordnancesurvey.co.uk
 
 Licence
 -------
 
-The Ordnance Survey iOS SDK is protected by © Crown copyright – Ordnance
-Survey 2013. It is subject to licensing terms granted by Ordnance Survey, the
-national mapping agency of Great Britain.
+The Ordnance Survey OpenSpace iOS SDK is protected by © Crown copyright – Ordnance Survey 2013. It is subject to licensing terms granted by Ordnance Survey, the national mapping agency of Great Britain.
 
-The Ordnance Survey iOS SDK includes the Route-Me library. The Route-Me
+The OpenSpace iOS SDK includes the Route-Me library. The Route-Me
 library is copyright (c) 2008-2013, Route-Me Contributors All rights reserved
 (subject to the BSD licence terms as follows):
 
