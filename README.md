@@ -12,11 +12,19 @@ This project includes a small sample OSTiles package containing OV0, OV1 and OV2
 
 Getting started
 ---
+#### Requirements
+
+This project requires the following points are met:
+
+- Minimum iOS version: 6.0.1
+- Xcode version: 4.5.2
+- iOS Openspace SDK version: 0.5.6_105
 
 
 #### Registration and Access
 
-[How to register](https://github.com/OrdnanceSurvey/openspace-ios-sdk#registration-and-access)
+In order to access and use the Service via the OpenSpace iOS-SDK, you must [apply for an API key.](https://github.com/OrdnanceSurvey/openspace-ios-sdk#registration-and-access)
+
 
 #### Clone project
 
