@@ -45,7 +45,7 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 Copy and paste the API Key and associated URL into the demo app
 
-Note: if an OS OpenSpace Pro or OS OnDemand account then change kOSIsPro to YES
+Change kOSIsPro to YES
 
 <pre>
 //In Common.m
