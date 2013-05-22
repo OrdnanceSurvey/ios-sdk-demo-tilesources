@@ -23,7 +23,7 @@ This project requires the following points are met:
 
 #### Registration and Access
 
-In order to access and use the Service via the OpenSpace iOS-SDK, you must [apply for an API key.](https://github.com/OrdnanceSurvey/openspace-ios-sdk#registration-and-access)
+In order to access and use the Service via the OpenSpace iOS-SDK, you must [apply for an API key.](https://github.com/OrdnanceSurvey/openspace-ios-sdk#getting-started)
 
 
 #### Clone project
