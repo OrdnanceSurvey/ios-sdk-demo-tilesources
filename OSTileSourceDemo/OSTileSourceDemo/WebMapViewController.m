@@ -25,7 +25,7 @@
     
     {
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey appleId:kOSAppleAppId openSpacePro:kOSIsPro];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
         _mapView.delegate = self;

@@ -40,7 +40,7 @@
 #if 0 //enable-disable the web map source
         
         //create web tile source with API details
-        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey appleId:kOSAppleAppId openSpacePro:kOSIsPro];
+        id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey openSpacePro:kOSIsPro];
         
         [tileSources addObject:webSource];
         

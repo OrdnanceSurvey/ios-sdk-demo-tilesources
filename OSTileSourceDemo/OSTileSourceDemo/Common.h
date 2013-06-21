@@ -15,7 +15,6 @@
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
 extern NSString *const kOSApiKey;
-extern NSString *const kOSAppleAppId;
 extern BOOL const kOSIsPro;
 
 
