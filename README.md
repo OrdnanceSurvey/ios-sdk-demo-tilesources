@@ -18,7 +18,7 @@ This project requires the following points are met:
 
 - Minimum iOS version: 6.0.1
 - Xcode version: 4.5.2
-- iOS Openspace SDK version: 0.5.6_105
+- iOS Openspace SDK version: TBC
 
 
 #### Registration and Access
@@ -36,8 +36,8 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 #### Download openspace-ios-sdk
 
- - Download the latest openspace-ios-sdk static framework TBC 
- - Unzip into the project directory root
+ - Download the latest [openspace-ios-sdk static framework](https://github.com/OrdnanceSurvey/openspace-ios-sdk#contents)
+ - Unzip into the StaticFrameworks directory under the project root
  <pre>
  $SRCROOT/StaticFrameworks
  </pre>
@@ -47,7 +47,9 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 Copy and paste the API Key into the demo app
 
-Change kOSIsPro to YES
+Update Bundle Identifier
+
+Change kIS_PRO appropriately
 
 ```objective-c
 //In Common.m
