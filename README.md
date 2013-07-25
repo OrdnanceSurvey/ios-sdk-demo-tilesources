@@ -36,7 +36,7 @@ git clone https://github.com/OrdnanceSurvey/ios-sdk-demo-tilesources.git
 
 #### Download openspace-ios-sdk
 
- - Download the latest [openspace-ios-sdk static framework](https://github.com/OrdnanceSurvey/openspace-ios-sdk#contents)
+ - Download the latest [openspace-ios-sdk static framework](http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/ios-sdk.html)
  - Unzip into the StaticFrameworks directory under the project root
  <pre>
  $SRCROOT/StaticFrameworks
