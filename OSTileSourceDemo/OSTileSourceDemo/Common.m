@@ -14,8 +14,8 @@
  * Define your OS Openspace API KEY details below
  * @see http://www.ordnancesurvey.co.uk/oswebsite/web-services/os-openspace/index.html
  */
-NSString *const kOSApiKey = @"API_KEY";
-const BOOL kOSIsPro = YES;
+NSString *const kOSApiKey = @"E2BE1E5D60283BF3E0430B6CA40ACE3B";
+const BOOL kOSIsPro = NO;
 
 
 @end
