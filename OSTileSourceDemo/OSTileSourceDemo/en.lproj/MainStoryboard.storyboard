@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G56" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="5Qt-lr-U7e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="5Qt-lr-U7e">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
         <!--Web Map View Controller - Web Map Source-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="WebMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uaz-9f-ukh"/>
+                        <viewControllerLayoutGuide type="bottom" id="de4-yn-hbz"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xgc-rp-OUE" customClass="OSMapView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hGV-EG-fjk" customClass="OSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Xgc-rp-OUE" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="Zfj-FS-uvf"/>
-                            <constraint firstItem="Xgc-rp-OUE" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="eNn-bk-ppe"/>
-                            <constraint firstItem="Xgc-rp-OUE" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="k66-IE-lwX"/>
-                            <constraint firstItem="Xgc-rp-OUE" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="sni-xx-qsA"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Web Map Source" image="globe.png" id="blT-ix-2fg"/>
                     <connections>
-                        <outlet property="mapView" destination="Xgc-rp-OUE" id="cU7-pc-rUB"/>
+                        <outlet property="mapView" destination="hGV-EG-fjk" id="zel-Yn-zmD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="-466"/>
+            <point key="canvasLocation" x="380" y="-332"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="VBC-dF-dum">
@@ -56,31 +56,31 @@
         <scene sceneID="7Lw-ki-C98">
             <objects>
                 <viewController id="3sl-l1-jJq" customClass="DBSourceViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ftv-hq-QjK"/>
+                        <viewControllerLayoutGuide type="bottom" id="j8d-8o-Ldx"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bQ1-Je-GtB">
-                        <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SQ8-rZ-Wor" customClass="OSMapView">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CIu-a7-9Yb" customClass="OSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="SQ8-rZ-Wor" firstAttribute="top" secondItem="bQ1-Je-GtB" secondAttribute="top" type="default" id="6bI-yU-W6H"/>
-                            <constraint firstItem="SQ8-rZ-Wor" firstAttribute="leading" secondItem="bQ1-Je-GtB" secondAttribute="leading" type="default" id="PCO-4X-Kwg"/>
-                            <constraint firstItem="SQ8-rZ-Wor" firstAttribute="trailing" secondItem="bQ1-Je-GtB" secondAttribute="trailing" type="default" id="WGq-Uc-WxM"/>
-                            <constraint firstItem="SQ8-rZ-Wor" firstAttribute="bottom" secondItem="bQ1-Je-GtB" secondAttribute="bottom" type="default" id="XoL-xV-4mz"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="DB Tile Source" image="database.png" id="uIv-oc-wcQ"/>
                     <navigationItem key="navigationItem" id="ndZ-KV-Jt3"/>
                     <connections>
-                        <outlet property="mapView" destination="SQ8-rZ-Wor" id="fkq-gT-qmG"/>
+                        <outlet property="mapView" destination="CIu-a7-9Yb" id="ioy-zg-olh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kby-e3-laQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="431"/>
+            <point key="canvasLocation" x="380" y="321"/>
         </scene>
     </scenes>
     <resources>
