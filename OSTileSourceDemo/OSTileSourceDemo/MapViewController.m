@@ -15,8 +15,8 @@
 
 @implementation MapViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -24,7 +24,7 @@
     //add a button to view
     {
         UIButton *showPackageBoundsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        showPackageBoundsBtn.frame = CGRectMake(10, 10, 40, 40);
+        showPackageBoundsBtn.frame = CGRectMake(10, 30, 40, 40);
         showPackageBoundsBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         showPackageBoundsBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [showPackageBoundsBtn setImage:[UIImage imageNamed:@"screen.png"] forState:UIControlStateNormal];
@@ -46,20 +46,45 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 
-#pragma mark OSMap methods
+#pragma mark TileSouce bounds
+
+
+/**
+ * Return an Polygon for the product code in tilesources array
+ */
+-(OSPolygon *) getBoundsForProductCode:(NSString *)productCode inTileSources: (NSArray *)tileSources {
+    
+    //loop through tileSources
+    for( id<OSTileSource> ts in tileSources ) {
+        
+        //Grab the bounding box displayed by this tileSource
+        OSGridRect gr = [ts boundsForProductCode: productCode];
+        
+        //assert if a valid OSGridRect
+        if( !OSGridRectEqualToRect(gr, OSGridRectNull) ) {
+            
+            NSLog(@"Tilesource bounds for product code %@ : %.0f,%.0f,%.0f,%.0f", productCode, gr.originSW.easting,gr.originSW.northing, gr.originSW.easting+gr.size.width, gr.originSW.northing+gr.size.height);
+            
+            return [self getPolygonForGridRect:gr];
+        }
+        
+    }
+    
+    return nil;
+    
+}
 
 /*
  * Generic method to generate an OSPolygon overlay for the OSGridRect passed
  */
--(OSPolygon *)getPolygonForGridRect: (OSGridRect)gr
-{
+-(OSPolygon *)getPolygonForGridRect: (OSGridRect)gr {
     
     OSGridPoint se;
     se.easting = gr.originSW.easting + gr.size.width;

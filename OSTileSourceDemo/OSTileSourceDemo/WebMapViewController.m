@@ -17,8 +17,8 @@
 @implementation WebMapViewController
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     _showingPackageBounds = NO;
@@ -28,8 +28,9 @@
         id<OSTileSource> webSource = [OSMapView webTileSourceWithAPIKey:kOSApiKey openSpacePro:kOSIsPro];
         _mapView.tileSources = [NSArray arrayWithObjects:webSource, nil];
         
-        _mapView.delegate = self;
-        _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        [_mapView setDelegate: self];
+        
+        [_mapView setRegion: OSCoordinateRegionForGridRect(OSNationalGridBounds)];
         
         NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
         
@@ -37,8 +38,8 @@
     
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
@@ -48,13 +49,13 @@
 
 #pragma mark OSMapviewdelegate methods
 
--(OSOverlayView *)mapView:(OSMapView *)mapView viewForOverlay:(id<OSOverlay>)overlay
-{
-    if ( [overlay isKindOfClass:[OSPolygon class]] )
-    {
-        /*
-         * style OSPolygon view
-         */
+-(OSOverlayView *)mapView:(OSMapView *)mapView viewForOverlay:(id<OSOverlay>)overlay {
+    
+    /*
+     * style OSPolygon view
+     */
+    if ( [overlay isKindOfClass:[OSPolygon class]] ) {
+        
         OSPolygonView * view = [[OSPolygonView alloc] initWithPolygon:(id)overlay];
         view.lineWidth = 1;
         view.strokeColor = [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
@@ -72,32 +73,18 @@
 /*
  * Handle button tap to toggle display of the ostiles packages
  */
-- (IBAction)toggleShowPackageBounds:(id)sender
-{
+- (IBAction)toggleShowPackageBounds:(id)sender {
     
     static NSString * productCodeToDisplay = @"OV2";
     
     //toggle display of tile source package bounds
-    if( _showingPackageBounds ){
+    if( _showingPackageBounds ) {
         
         [_mapView removeOverlays:_mapView.overlays];
         
     }else{
         
-        //Grab the one tileSource
-        id<OSTileSource> ts = [[_mapView tileSources] lastObject];
-        
-        //Grab the bounding box displayed by this tileSource
-        OSGridRect gr = [ts boundsForProductCode: productCodeToDisplay];
-            
-        //assert if a valid OSGridRect
-        if( !OSGridRectEqualToRect(gr, OSGridRectNull) )
-        {
-            [_mapView addOverlay: [super getPolygonForGridRect:gr]];
-                
-            NSLog(@"Tilesource bounds for prodcode %@ : %.0f,%.0f,%.0f,%.0f",productCodeToDisplay, gr.originSW.easting,gr.originSW.northing, gr.originSW.easting+gr.size.width, gr.originSW.northing+gr.size.height);
-        }
-            
+        [_mapView addOverlay: [super getBoundsForProductCode:productCodeToDisplay inTileSources:_mapView.tileSources]];
         
     }
     

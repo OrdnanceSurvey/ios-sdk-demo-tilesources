@@ -21,4 +21,6 @@
 
 -(OSPolygon *)getPolygonForGridRect:(OSGridRect)gr;
 
+-(OSPolygon *) getBoundsForProductCode:(NSString *)productCode inTileSources: (NSArray *)tileSources;
+
 @end

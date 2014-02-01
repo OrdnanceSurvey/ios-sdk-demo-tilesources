@@ -9,7 +9,6 @@
 #import "DBSourceViewController.h"
 
 
-
 @interface DBSourceViewController () <OSMapViewDelegate>
 
 @end
@@ -17,8 +16,8 @@
 @implementation DBSourceViewController
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     _showingPackageBounds = NO;
@@ -52,8 +51,9 @@
         _mapView.tileSources = [NSArray arrayWithArray:tileSources];
         _mapView.mapProductCodes = [NSArray arrayWithArray:products];
         
-        _mapView.delegate = self;
-        _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+        [_mapView setDelegate: self];
+        
+        [_mapView setRegion: OSCoordinateRegionForGridRect(OSNationalGridBounds)];
         
         NSLog(@"Using SDK Version: %@",[OSMapView SDKVersion]);
         
@@ -63,8 +63,8 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     
@@ -77,22 +77,24 @@
  * Product codes: @"OV0", @"OV1", @"OV2"
  * Bounds: 0,0,700000,1300000
  */
-- (id<OSTileSource>)sampleTilePackage
-{
-    return [OSMapView localTileSourceWithFileURL:[[NSBundle mainBundle] URLForResource:@"sample.ostiles" withExtension:nil]];
+- (id<OSTileSource>)sampleTilePackage {
+    
+    static NSString *packagedTileName = @"sample.ostiles";
+    
+    return [OSMapView localTileSourceWithFileURL:[[NSBundle mainBundle] URLForResource:packagedTileName withExtension:nil]];
 }
 
 
 
 #pragma mark OSMapviewdelegate methods
 
--(OSOverlayView *)mapView:(OSMapView *)mapView viewForOverlay:(id<OSOverlay>)overlay
-{
-    if ( [overlay isKindOfClass:[OSPolygon class]] )
-    {
-        /*
-         * style OSPolygon view
-         */
+-(OSOverlayView *)mapView:(OSMapView *)mapView viewForOverlay:(id<OSOverlay>)overlay {
+    
+    /*
+     * style OSPolygon view
+     */
+    if ( [overlay isKindOfClass:[OSPolygon class]] ) {
+        
         OSPolygonView * view = [[OSPolygonView alloc] initWithPolygon:(id)overlay];
         view.lineWidth = 1;
         view.strokeColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:1];
@@ -110,34 +112,18 @@
 /*
  * Handle button tap to toggle display of the ostiles packages
  */
-- (IBAction)toggleShowPackageBounds:(id)sender
-{
+- (IBAction)toggleShowPackageBounds:(id)sender {
     
-    static NSString * productCodeToDisplay = @"OV2";
-    
+    static NSString *productCodeToDisplay = @"OV2";
     
     //toggle display of tile source package bounds
-    if( _showingPackageBounds ){
+    if( _showingPackageBounds ) {
         
         [_mapView removeOverlays:_mapView.overlays];
         
     }else{
         
-        //loop through tileSources
-        for( id<OSTileSource> ts in _mapView.tileSources )
-        {
-            //Grab the bounding box displayed by this tileSource
-            OSGridRect gr = [ts boundsForProductCode: productCodeToDisplay];
-            
-            //assert if a valid OSGridRect
-            if( !OSGridRectEqualToRect(gr, OSGridRectNull) )
-            {
-                [_mapView addOverlay: [super getPolygonForGridRect:gr]];
-                
-                NSLog(@"Tilesource bounds for prodcode %@ : %.0f,%.0f,%.0f,%.0f",productCodeToDisplay, gr.originSW.easting,gr.originSW.northing, gr.originSW.easting+gr.size.width, gr.originSW.northing+gr.size.height);
-            }
-            
-        }
+        [_mapView addOverlay: [super getBoundsForProductCode:productCodeToDisplay inTileSources:_mapView.tileSources]];
         
     }
     
